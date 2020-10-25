@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1>Hello {{user.first_name}}<br>{{name}} !!!</h1>
+
+<form action="add" method="POST">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+    
+    <input type="submit" value="<< Enter >>"><br>
+
+    <a href="{{link}}">Go to atulcoin GitHub</a><br>
+    
+    <a href="app2/logout">logout</a><br><br>
+    
+    
+    <a href="app2/vidb">view data base</a><br>
+
+
+    <a href="app2/form1">data base update form</a><br>
+    {% else %}
+    <h1> Plz login or singup to view cancer prediction </h1>
+    <a href="app2/singup">singup</a><br>
+    <a href="app2/login">login</a><br>
+
+    {% endif %}
+{% endblock %}
