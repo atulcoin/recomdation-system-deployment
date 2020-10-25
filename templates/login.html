@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    <form action="login" method="POST">
+        {% csrf_token %}
+        enter ur username: <input type="text" name="username" placeholder="username"><br>
+        enter ur password: <input type="text" name="password" placeholder="password"><br>
+        <input type="submit"><br>
+    </form>
+<div>
+    {% for messages in messages %}
+    <h3>{{messages}}</h3>
+    {% endfor %}  
+</div>
+<div>
+<a href="/">Go to atulcoin GitHub</a><br>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Hello <br> New User Please Singup!!!</h1>
+
+<form action="singup" method="POST">
+    {% csrf_token %}
+    <input type="text" name="first_name" placeholder="first name" ><br>
+    <input type="text" name="last_name" placeholder='last name'><br>
+    <input type="text" name="username" placeholder="username"><br>
+    <input type="email" name="email" placeholder="email"><br>
+    <input type="password" name="password1" placeholder="password"><br>
+    <input type="password" name="password2" placeholder="confirm password"><br>
+
+    <input type="submit"><br>
+    
+
+    <a href="{{link}}">Go to atulcoin GitHub</a><br>
+</form>
+<div>
+     {% for messages in messages %}
+     <h3>{{messages}}</h3>
+     {% endfor %}  
+</div>
+<div>
+    <a href="/">Go to atulcoin GitHub</a><br>
+</div>
+
+{% endblock %}
