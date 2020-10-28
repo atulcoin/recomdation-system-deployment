@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from .models import emp
+from .models import movieId
 
 
 # Create your views here.
@@ -11,7 +12,7 @@ def logout(request):
     return redirect('/')
 
 def vidb(request):
-    data = emp.objects.all()
+    data = movieId.objects.all()
     return render(request,"vdb.html",{'data':data})
     
 
