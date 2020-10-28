@@ -16,6 +16,12 @@
     <div id="OneDiv">
         <table>
             <thead>
+                <select>
+                    <option disabled="true" selected>-- select movie name you have watched --</option>
+                    {% for d in data %}
+                    <option>{{d.titles}}</option>
+                    {% endfor %}
+                </select>
                 <th>MoiveId</th>
                 <th>Title</th>
                 <th>Geners</th>
