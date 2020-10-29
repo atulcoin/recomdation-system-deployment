@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'mldjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db1',
+        'NAME': 'recom',
         'USER': 'ni',
         'PASSWORD': 6621,
         'HOST': 'localhost'

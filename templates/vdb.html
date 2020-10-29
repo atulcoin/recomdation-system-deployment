@@ -16,25 +16,23 @@
     <div id="OneDiv">
         <table>
             <thead>
-                <select>
-                    <option disabled="true" selected>-- select movie name you have watched --</option>
-                    {% for d in data %}
-                    <option>{{d.titles}}</option>
-                    {% endfor %}
-                </select>
-                <th>MoiveId</th>
-                <th>Title</th>
-                <th>Geners</th>
+                <th>ID</th>
+                <th>name</th>
+                <th>address</th>
+                <th>salary</th>
+                <th>status</th>
                 <th>Buttons</th>
             </thead>
             {% for d in data %}
                 <tr>
-                    <td>{{d.movieId}}</td>
-                    <td>{{d.titles}}</td>
-                    <td>{{d.geners}}</td>
+                    <td>{{d.id}}</td>
+                    <td>{{d.Name}}</td>
+                    <td>{{d.address}}</td>
+                    <td>{{d.salary}}</td>
+                    <td>{{d.status}}</td>
                     <td>
-                        <a href="/edit?id={{d.movieId}}">editit</a>
-                        <a href="delete?id={{d.movieId}}">deletee</a><br>
+                        <a href="/edit?id={{d.id}}">editit</a>
+                        <a href="delete?id={{d.id}}">deletee</a><br>
                     </td>
                 </tr>
             {% endfor %}

@@ -1,9 +1,36 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-
-multypication....{{result3}}<br>
-<a href="{{link}}">Home</a>
-
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Data</title>
+</head>
+<body>
+    {{msg}}
+    
+    <h2 id="head">Movie</h2>
+    <div id="SecondDiv">
+        <form action="/">
+            <input type="Submit" value="<< Back">
+        </form>
+    </div>
+    <div id="OneDiv">
+        <table>
+            <form action="/app2/monkey" method="POST">
+                {% csrf_token %}
+                
+                <thead>
+                    <th>Please select a movie </th>
+                </thead>
+                <select name="title">
+                    <option disabled="true" selected>-- select movie name --</option>
+                    {% for d in data1 %}
+                    <option>{{d.title}}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="click">
+            </form>
+        </table>
+    </div>
+</body>
+</html>

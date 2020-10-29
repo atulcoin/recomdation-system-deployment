@@ -7,6 +7,10 @@ from .models import movieId
 
 
 # Create your views here.
+def recomdation(request):
+    data1 = movieId.objects.all()
+    return render(request,"result2.html",{'data1':data1})
+
 def logout(request):
     auth.logout(request)
     return redirect('/')
@@ -27,7 +31,7 @@ def login(request):
             auth.login(request, user)
             return redirect("/")
         else :
-            messages.info(request,'chuitye galat hai tera paass')
+            messages.info(request,'Sorry Wrong Password')
             return redirect("login")
     else:
         return render(request,'login.html')
@@ -82,5 +86,16 @@ def delete(request):
     nisha = request.GET['id']
     emp.objects.filter(id=nisha).delete()
     return redirect('vidb')
+
+
+
+
+def monkey(request):
+  if request.method == 'POST':
+    if request.POST.get('title'):
+        n98 = movieId()
+        n98=request.POST.get('title')
+        print(n98)
+        return render(request,"result2.html")
 
 
