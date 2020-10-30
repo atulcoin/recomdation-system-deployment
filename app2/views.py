@@ -10,6 +10,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
 from sklearn.metrics.pairwise import cosine_similarity
+import json
 
 
 # Create your views here.
@@ -129,10 +130,14 @@ def monkey(request):
             similar= pd.DataFrame(dictdf, index= matrix1_df.index)
             similar.sort_values('hybrid', ascending=False, inplace=True)
             output=similar[1:].head(10)
+            json_record = output.reset_index().to_json(orient ='records')
+            data = []
+            data = json.loads(json_record)
+            context={'d':data}
 
 
 
 
-            return render(request,"result.html",{'output':output})
+            return render(request,"result.html",context)
 
 

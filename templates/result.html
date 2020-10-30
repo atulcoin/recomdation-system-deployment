@@ -1,20 +1,37 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-
-
-<br>{{output}}<br>
-
-<form action="/" method="POST">
-
-    {% csrf_token %}
-
-    <input type="submit"><br>
-</form>
-
-    <a href="{{link}}">Go to atulcoin GitHub</a><br>
-
-<a href="/">Home</a>
-
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Data</title>
+</head>
+<body>
+    {{msg}}
+    <h2 id="head">Movies you might like</h2>
+    <div id="SecondDiv">
+        <form action="/">
+            <input type="Submit" value="<< Back">
+        </form>
+    </div>
+    <div id="OneDiv">
+        <table>
+            <thead>
+                <th>movie name</th>
+                <th>content</th>
+                <th>collibrative</th>
+                <th>hybrid</th>
+            </thead>
+            {% for i in d %}
+                <tr>
+                    <td>{{i.index}}</td>
+                    <td>{{i.content}}</td>
+                    <td>{{i.collibrative}}</td>
+                    <td>{{i.hybrid}}</td>
+                    <td>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
