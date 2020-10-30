@@ -128,11 +128,11 @@ def monkey(request):
             dictdf= {'content':score1, 'collibrative':score2, 'hybrid':hybrid}
             similar= pd.DataFrame(dictdf, index= matrix1_df.index)
             similar.sort_values('hybrid', ascending=False, inplace=True)
-            print(similar[1:].head(10))
+            output=similar[1:].head(10)
 
 
 
 
-            return render(request,"result2.html")
+            return render(request,"result.html",{'output':output})
 
 
