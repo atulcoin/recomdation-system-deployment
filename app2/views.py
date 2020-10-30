@@ -4,6 +4,12 @@ from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from .models import emp
 from .models import movieId
+import pandas as pd
+from .models import Ratings
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 # Create your views here.
@@ -91,11 +97,42 @@ def delete(request):
 
 
 def monkey(request):
-  if request.method == 'POST':
-    if request.POST.get('title'):
-        n98 = movieId()
-        n98=request.POST.get('title')
-        print(n98)
-        return render(request,"result2.html")
+    if request.method == 'POST':
+        if request.POST.get('title'):
+            n98 = movieId()
+            n98=request.POST.get('title')
+            #print(n98)
+            movies=pd.DataFrame(list(movieId.objects.all().values('movieId','title','genres')))
+            ratings=pd.DataFrame(list(Ratings.objects.all().values('userId','movieId','rating')))
+            #print(df.head())
+            movies['genres']= movies['genres'].str.replace('|',' ')
+            ratings_f = ratings.groupby('userId').filter(lambda x: len(x) >=100)
+            movie_list_rating =ratings_f.movieId.unique().tolist()
+            movies = movies[movies.movieId.isin(movie_list_rating)]
+            tfidfvec = TfidfVectorizer(stop_words='english') 
+            tfidf_movieid = tfidfvec.fit_transform((movies["genres"]))
+            tf_df=pd.DataFrame(tfidf_movieid.toarray(), index=movies.index.tolist())
+            pca = PCA(n_components=12)
+            matrix = pca.fit_transform(tf_df)
+            ratings_f1=pd.merge(movies[['movieId']], ratings_f, on="movieId", how="right")
+            ratings_f2=ratings_f1.pivot(index='movieId', columns='userId', values = 'rating').fillna(0)
+            pca1 = PCA(n_components=30)
+            matrix2 = pca1.fit_transform(ratings_f2)
+            matrix1_df=pd.DataFrame(matrix[:,0:12], index=movies.title.tolist())
+            matrix2_df=pd.DataFrame(matrix2,index=movies.title.tolist())
+            a_1 = np.array(matrix1_df.loc[n98]).reshape(1,-1)
+            a_2 = np.array(matrix2_df.loc[n98]).reshape(1,-1)
+            score1=cosine_similarity(matrix1_df,a_1).reshape(-1)
+            score2=cosine_similarity(matrix2_df,a_2).reshape(-1)
+            hybrid = ((score1 + score2)/2.0)
+            dictdf= {'content':score1, 'collibrative':score2, 'hybrid':hybrid}
+            similar= pd.DataFrame(dictdf, index= matrix1_df.index)
+            similar.sort_values('hybrid', ascending=False, inplace=True)
+            print(similar[1:].head(10))
+
+
+
+
+            return render(request,"result2.html")
 
 
