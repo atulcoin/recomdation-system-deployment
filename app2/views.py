@@ -75,8 +75,6 @@ def singup(request):
 from .forms import inputdata
 def form1(request):
     con = inputdata(request.POST or None)
-    savedata=request.session.get('newformdata')
-    print(savedata)
     if request.method == 'POST':
         
         if con.is_valid():
@@ -91,7 +89,7 @@ def form1(request):
 
 def delete(request):
     nisha = request.GET['id']
-    emp.objects.filter(id=nisha).delete()
+    Emp.objects.filter(id=nisha).delete()
     return redirect('vidb')
 
 

@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'q^k6r8z@#a-##i*hv4khxa+c+(wlq41+1zcs*91q9-(jne8f2s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,10 +78,11 @@ WSGI_APPLICATION = 'mldjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'recom',
-        'USER': 'ni',
-        'PASSWORD': 6621,
-        'HOST': 'localhost'
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'nisha6621',
+        'HOST': 'database-2.c6p5lyengyqj.ap-south-1.rds.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
