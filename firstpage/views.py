@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here. 
 import pandas as pd
-from sklearn.externals import joblib
+#from sklearn.externals import joblib
 #reloadmodel = joblib.load('./models/titanicmodel.pkl')
 
 def home(request):
